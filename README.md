@@ -20,10 +20,7 @@ by Marta Monaci, Valerio Agasucci and Giorgio Grani.
 
 ## Results
 
-The output of the experiments can be found in folder **results_margot/**, where:
 
-- folder **plots/** will contain all the tree plots files related to the experiments performed.
-- file **stats_margot.xlsx** will contain the statistics of all the experiments performed.
 ## Team
 
 Contributors to this code:
