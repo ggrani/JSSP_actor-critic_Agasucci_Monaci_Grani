@@ -13,6 +13,7 @@ by Marta Monaci, Valerio Agasucci and Giorgio Grani.
 }
 ```
 ## Installation
+The neural network models are implemented using [Pytorch](https://pytorch.org/).
 
 ## Requirements
 
