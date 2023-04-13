@@ -3,6 +3,16 @@ This repository contains the source code and the data related to the paper [Marg
 by Marta Monaci, Valerio Agasucci and Giorgio Grani.
 
 ```
+@misc{monaci2021actorcritic,
+      title={An actor-critic algorithm with deep double recurrent agents to solve the job shop scheduling problem}, 
+      author={Marta Monaci and Valerio Agasucci and Giorgio Grani},
+      year={2021},
+      eprint={2110.09076},
+      archivePrefix={arXiv},
+      primaryClass={math.OC}
+}
+
+```
 ## Installation
 
 ## Requirements
