@@ -16,6 +16,7 @@ by Marta Monaci, Valerio Agasucci and Giorgio Grani.
 The neural network models are implemented using [Pytorch](https://pytorch.org/).
 
 ## Requirements
+The file requirements.txt reports the list of packages that must be installed to run the code. You can add a package to your environment via pip or anaconda using either pip install "package" or conda install "package".
 
 ## Configuration and running
 
