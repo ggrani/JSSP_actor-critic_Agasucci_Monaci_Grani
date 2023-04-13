@@ -11,7 +11,6 @@ by Marta Monaci, Valerio Agasucci and Giorgio Grani.
       archivePrefix={arXiv},
       primaryClass={math.OC}
 }
-
 ```
 ## Installation
 
