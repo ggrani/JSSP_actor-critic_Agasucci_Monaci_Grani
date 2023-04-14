@@ -1,5 +1,6 @@
 # JSSP_actor-critic_Agasucci_Monaci_Grani
-This repository contains the source code and the data related to the paper [An actor-critic algorithm with deep double recurrent agents to solve the job shop scheduling problem](https://arxiv.org/abs/2110.09076)
+This repository contains the source code and the data related to the paper [An actor-critic algorithm with policy gradients to solve the job shop
+scheduling problem using deep double recurrent agents](https://arxiv.org/abs/2110.09076)
 by Marta Monaci, Valerio Agasucci and Giorgio Grani.
 
 ```
