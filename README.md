@@ -30,6 +30,7 @@ Contributors to this code:
 
 * [G Grani](https://github.com/GiorgioGrani)
 * [Marta Monaci](https://github.com/m-monaci)
+* [Valerio Agasucci](https://github.com/Valerio1994a)
 
 # License
 
