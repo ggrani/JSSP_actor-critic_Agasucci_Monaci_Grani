@@ -26,8 +26,8 @@ Depending on the set of instances you want to test the model on, you have simply
 
 * Taillard benchmark set (insert 'TaiBenchmarkSet')
 * Taillard generated set (insert 'TaiGeneratedSet')
-* Gaussian Set (insert'GaussianSet')
-* Poisson set (insert'PoissonSet')
+* Gaussian Set (insert 'GaussianSet')
+* Poisson set (insert 'PoissonSet')
 
 To generate new sets of instances:
 
