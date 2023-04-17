@@ -24,16 +24,16 @@ The file requirements.txt reports the list of packages that must be installed to
 In order to test the saved model, you just need to run `main_test.py`. 
 Depending on the set of instances you want to test the model on, you have simply to modify the `set_to_test` parameter as follows:
 
-* Taillard benchmark set (insert 'TaiBenchmarkSet')
-* Taillard generated set (insert 'TaiGeneratedSet')
-* Gaussian Set (insert 'GaussianSet')
-* Poisson set (insert 'PoissonSet')
+* Taillard benchmark set (insert **'TaiBenchmarkSet**)
+* Taillard generated set (insert **'TaiGeneratedSet'**)
+* Gaussian Set (insert **'GaussianSet'**)
+* Poisson set (insert **'PoissonSet'**)
 
 To generate new sets of instances:
 
-* according to the Taillard method (insert 'TaillardGenerator' and modify the related parameters as you prefer)
-* according to the Gaussian method (insert 'GaussianGenerator' and modifythe related parameters as you prefer)
-* according to the Poisson method (insert'PoissonGenerator'and modify the related parameters as you prefer)
+* according to the Taillard method (insert **'TaillardGenerator'** and modify the related parameters as you prefer)
+* according to the Gaussian method (insert **'GaussianGenerator'** and modifythe related parameters as you prefer)
+* according to the Poisson method (insert **'PoissonGenerator'** and modify the related parameters as you prefer)
 
 ## Results
 
