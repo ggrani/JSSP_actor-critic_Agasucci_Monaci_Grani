@@ -1,7 +1,7 @@
 from enum import Enum
 import random
 import numpy as np
-from uniform_instance_gen import uni_instance_gen
+from uniform_gen import uni_instance_gen
 
 class TableType(Enum):
     random_jobs = 1
@@ -18,6 +18,7 @@ class GeneneratorSpecs(Enum):
     Distribution = 5
     DistParams = 6
     Path = 7
+    Category = 8
 
 class gametable():
 
@@ -68,6 +69,7 @@ class gametable():
 
     def instances_reader(specs=None):
 
+        category = specs.get(GeneneratorSpecs.Category)
         probs = specs.get(GeneneratorSpecs.Problems)
         seed = specs.get(GeneneratorSpecs.Seed)
         repetitions = specs.get(GeneneratorSpecs.Repetitions)
@@ -78,7 +80,10 @@ class gametable():
         data = {(j,m): [] for (j,m) in probs}
         for (j,m) in probs:
 
-           data_prob = np.load('TaillardGeneratedSet/gen_tai{}_{}_seed{}.npy'.format(j, m, seed))
+           if category == 'Taillard':   data_prob = np.load('TaillardGeneratedSet/GeneratedTai{}_{}_seed{}.npy'.format(j, m, seed))
+           elif category == 'Gaussian': data_prob = np.load('GaussianSet/GaussianSet{}_{}.npy'.format(j, m), allow_pickle = True)
+           elif category == 'Poisson':  data_prob = np.load('PoissonSet/PoissonSet{}_{}.npy'.format(j, m), allow_pickle = True)
+
            data[(j,m)] = data_prob
 
         problems = {}
@@ -108,8 +113,8 @@ class gametable():
         probs = specs.get(GeneneratorSpecs.Problems)
         seed = specs.get(GeneneratorSpecs.Seed)
         repetitions = specs.get(GeneneratorSpecs.Repetitions)
-        path = specs.get(GeneneratorSpecs.Path)
         distparams = specs.get(GeneneratorSpecs.DistParams)
+        path = specs.get(GeneneratorSpecs.Path)
 
         if distparams is None:
             distparams = {"lb": 1, "ub": 99}
@@ -157,6 +162,7 @@ class gametable():
         repetitions = specs.get(GeneneratorSpecs.Repetitions)
         distribution = specs.get(GeneneratorSpecs.Distribution)
         distparams = specs.get(GeneneratorSpecs.DistParams)
+        path = specs.get(GeneneratorSpecs.Path)
 
         if repetitions is None:
             repetitions = len(probs)
@@ -187,7 +193,6 @@ class gametable():
 
                         for rep in range(repetitions):
                             cost = gametable.custrand(distribution, distparams)
-                            #cost = max(0.1, float(np.random.poisson(lam=distparams["lam"], size=1)))
                             costs[rep][j][m] = round(cost, 2) + 0.0
                     else:
                         chance = random.random()
@@ -198,11 +203,15 @@ class gametable():
                                 cost = gametable.custrand(distribution, distparams)
                                 costs[rep][j][m] = round(cost, 2) + 0.0
 
-            problems[p] = jobs
+            problems[p] = [jobs for _ in range(repetitions)]
             costs_probs[p] = costs
+            data_prob = [[[[d[key] for key in d] for d in costs[rep]], jobs] for rep in range(repetitions)]
+            if distribution == random.gauss:
+                np.save(path + 'Gaussian_generated_data{}_{}_Seed{}.npy'.format(p[0], p[1], seed), np.array(data_prob, dtype=object))
+            elif distribution == np.random.poisson:
+                np.save(path + 'Poisson_generated_data{}_{}_Seed{}.npy'.format(p[0], p[1], seed), np.array(data_prob, dtype=object))
 
         return problems, costs_probs
-
 
     def custrand(distribution, distparams):
         if distribution == random.uniform or distribution == random.randint:
@@ -210,7 +219,7 @@ class gametable():
         elif distribution == random.gauss:
             return max(0.1, distribution(mu=distparams["mu"], sigma=distparams["sigma"]))
         elif distribution == np.random.poisson:
-            return max(0.1, distribution(lam=distparams["lam"], size=1)+0.0)
+            return max(0.1, float(distribution(lam=distparams["lam"], size=1)))
 
 
 
