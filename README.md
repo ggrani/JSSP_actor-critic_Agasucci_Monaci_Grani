@@ -17,12 +17,14 @@ by Marta Monaci, Valerio Agasucci and Giorgio Grani.
 The neural network models are implemented using [Pytorch](https://pytorch.org/).
 
 ## Requirements
-The file requirements.txt reports the list of packages that must be installed to run the code. You can add a package to your environment via pip or anaconda using either pip install "package" or conda install "package".
+The file requirements.txt reports the list of packages that must be installed to run the code. You can add a package to your environment via pip or anaconda using either pip install "package" or conda install "package". The code can be runned either on GPUs or CPUs.
 
 ## Configuration and running
 
 ## Results
 
+The output of the experiments can be found in folder **Results_TEST/**, where:
+**Statistics_set_name.xlsx** will report the statistics of the experiments performed on the related set.
 
 ## Team
 
