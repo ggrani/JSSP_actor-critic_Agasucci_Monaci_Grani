@@ -22,6 +22,7 @@ The file requirements.txt reports the list of packages that must be installed to
 ## Configuration and running
 
 In order to test the saved model, you just need to run `main_test.py`. 
+
 Depending on the set of instances you want to test the model on, you have simply to modify the `set_to_test` parameter as follows:
 
 * Taillard benchmark set (insert **'TaiBenchmarkSet**)
