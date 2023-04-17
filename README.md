@@ -36,7 +36,7 @@ To generate new sets of instances:
 * according to the Gaussian method (insert **'GaussianGenerator'** and modifythe related parameters as you prefer)
 * according to the Poisson method (insert **'PoissonGenerator'** and modify the related parameters as you prefer)
 
-[^1]: Taken from [L2D](https://github.com/zcaicaros/L2D)
+[^1]: Taken from https://github.com/zcaicaros/L2D
 
 ## Results
 
