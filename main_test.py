@@ -20,10 +20,10 @@ device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
 # - Taillard benchmark set ('TaiBenchmarkSet')
 # - Taillard generated set ('TaiGeneratedSet')
-# - To generate new Taillard instances ('TaillardGenerator')
-
 # - Gaussian Set ('GaussianSet')
 # - Poisson set ('PoissonSet')
+
+# - To generate new Taillard instances ('TaillardGenerator')
 # - To generate new Gaussian instances ('GaussianGenerator')
 # - To generate new Poisson instances ('PoissonGenerator')
 
