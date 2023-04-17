@@ -9,67 +9,125 @@ import os.path
 import random
 
 path = ''
-folder0 = "Results_TEST/"
-if not os.path.isdir(folder0):
-    os.mkdir(path + folder0)
-path = path+folder0
+folder = "Results_TEST/"            #Folder where to save the results
+if not os.path.isdir(folder):
+    os.mkdir(path + folder)
+path = path+folder
 
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
-#device = torch.device("cpu")
 
 #Choose a set of instances to test:
-# - Gaussian Set ('Gaussian')
-# - Poisson set ('Poisson')
-# - Taillard benchmark set ('TaiBenchmark')
-# - Taillard generated set ('TaiGenerated')
-# - To generate new Taillard set ('Generator')
 
-set_to_test = 'TaiBenchmark'
-if set_to_test == 'Generator':
-    seed = 100                                          #Random seed
-    lb, ub = 1, 99                                      #Minimum and maximum value of processing times
-    params = {'lb': 1, 'ub': 99}
+# - Taillard benchmark set ('TaiBenchmarkSet')
+# - Taillard generated set ('TaiGeneratedSet')
+# - To generate new Taillard instances ('TaillardGenerator')
 
-path_model, nep_model = 'SavedModel/', 25000             #Load model
+# - Gaussian Set ('GaussianSet')
+# - Poisson set ('PoissonSet')
+# - To generate new Gaussian instances ('GaussianGenerator')
+# - To generate new Poisson instances ('PoissonGenerator')
 
-if set_to_test == 'TaiBenchmark':
-    probs_size = [(15, 15), (20, 15), (20, 20), (30, 15), (30, 20)]  # Choose problem size (J, M)
-    repetitions = 10                                                 # Number of instances of each size
+set_to_test = 'TaiBenchmarkSet'
+
+path_model, nep_model = 'SavedModel/', 25000                              # Load model
+
+if set_to_test == 'TaiBenchmarkSet':
+    probs_size = [(15, 15), (20, 15), (20, 20), (30, 15), (30, 20)]       # Choose problem size (J, M)
+    repetitions = 10                                                      # Number of instances of each size
     jobsspecs = {
         GeneneratorSpecs.Problems: probs_size,
         GeneneratorSpecs.Repetitions: repetitions,
     }
     problems, costs = gametable.table(TableType.benchmark, jobsspecs)
 
-elif set_to_test == 'TaiGenerated':
+elif set_to_test == 'TaiGeneratedSet':
     probs_size = [(6,6), (10,10), (15,10), (15, 15), (20, 10), (20, 20)]  # Choose problem size (J, M)
     repetitions = 100                                                     # Number of instances of each size
     jobsspecs = {
+        GeneneratorSpecs.Category: 'Taillard',
         GeneneratorSpecs.Problems: probs_size,
         GeneneratorSpecs.Repetitions: repetitions,
         GeneneratorSpecs.Seed : 100,
     }
     problems, costs = gametable.table(TableType.reader, jobsspecs)
-#
-# elif set_to_test == 'Gaussian':
-#     jobsspecs = {
-#         GeneneratorSpecs.Problems: probs_size,
-#         GeneneratorSpecs.Repetitions: repetitions,
-#         GeneneratorSpecs.Probability: 0.7,
-#         GeneneratorSpecs.DistParams: {"mu": 100, "sigma": 10},
-#         GeneneratorSpecs.Seed : 100,
-#     }
-#     problems, costs = gametable.table(TableType.random_jobs, jobsspecs)
-#
-# elif set_to_test == 'Poisson':
-#     jobsspecs = {
-#         GeneneratorSpecs.Problems: probs_size,
-#         GeneneratorSpecs.Repetitions: repetitions,
-#         GeneneratorSpecs.Probability: 0.7,
-#         GeneneratorSpecs.DistParams: {},
-#         GeneneratorSpecs.Seed: 100,
-#     }
-#     problems, costs = gametable.table(TableType.random_jobs, jobsspecs)
+
+elif set_to_test == 'TaillardGenerator':
+    probs_size = [(15,10), (20,10)]                                      # Choose problem size (J, M)
+    repetitions = 100                                                    # Number of instances of each size
+    seed = 100                                                           # Random seed
+    params = {'lb': 1, 'ub': 99}                                         # Minimum and maximum value of processing times
+    path_set = ''                                                        # Path where to save the new generated instances
+
+    jobsspecs = {
+        GeneneratorSpecs.Category: 'Taillard',
+        GeneneratorSpecs.Problems: probs_size,
+        GeneneratorSpecs.Repetitions: repetitions,
+        GeneneratorSpecs.DistParams: params,
+        GeneneratorSpecs.Seed: seed,
+        GeneneratorSpecs.Path: path_set,
+    }
+    problems, costs = gametable.table(TableType.taillard_generator, jobsspecs)
+
+elif set_to_test == 'GaussianSet':
+    probs_size =  [(30,25),(35,30),(40,35),(45,40),(50,45)]              # Choose problem size (J, M)
+    repetitions = 100                                                    # Number of instances of each size
+
+    jobsspecs = {
+        GeneneratorSpecs.Category: 'Gaussian',
+        GeneneratorSpecs.Problems: probs_size,
+        GeneneratorSpecs.Repetitions: repetitions,
+    }
+
+    problems, costs = gametable.table(TableType.reader, jobsspecs)
+
+elif set_to_test == 'PoissonSet':
+    probs_size = [(30,25),(35,30),(40,35),(45,40),(50,45)]               # Choose problem size (J, M)
+    repetitions = 100                                                    # Number of instances of each size
+
+    jobsspecs = {
+        GeneneratorSpecs.Category: 'Poisson',
+        GeneneratorSpecs.Problems: probs_size,
+        GeneneratorSpecs.Repetitions: repetitions,
+    }
+    problems, costs = gametable.table(TableType.reader, jobsspecs)
+
+elif set_to_test == 'GaussianGenerator':
+    probs_size = [(15,10), (20,10)]                                      # Choose problem size (J, M)
+    repetitions = 100                                                    # Number of instances of each size
+    seed = 100                                                           # Random seed
+    prob = 0.7                                                           # Probability of assigning a machine to a job
+    params = {'mu': 100, 'sigma': 10}                                    # Params of the Gaussian Distribution
+    path_set = ''                                                        # Path where to save the new generated instances
+
+    jobsspecs = {
+        GeneneratorSpecs.Problems: probs_size,
+        GeneneratorSpecs.Repetitions: repetitions,
+        GeneneratorSpecs.Distribution: random.gauss,
+        GeneneratorSpecs.Probability: prob,
+        GeneneratorSpecs.DistParams: params,
+        GeneneratorSpecs.Seed: seed,
+        GeneneratorSpecs.Path: path_set,
+    }
+    problems, costs = gametable.table(TableType.random_jobs, jobsspecs)
+
+elif set_to_test == 'PoissonGenerator':
+    probs_size = [(15,10), (20,10)]                                     # Choose problem size (J, M)
+    repetitions = 100                                                   # Number of instances of each size
+    seed = 100                                                          # Random seed
+    prob = 0.7                                                          # Probability of assigning a machine to a job
+    params = {'lam': 100}                                               # Params of the Poisson Distribution
+    path_set = ''                                                       # Path where to save the new generated instances
+
+    jobsspecs = {
+        GeneneratorSpecs.Problems: probs_size,
+        GeneneratorSpecs.Repetitions: repetitions,
+        GeneneratorSpecs.Distribution: np.random.poisson,
+        GeneneratorSpecs.Probability: 0.7,
+        GeneneratorSpecs.DistParams: params,
+        GeneneratorSpecs.Seed: seed,
+        GeneneratorSpecs.Path: path_set,
+    }
+    problems, costs = gametable.table(TableType.random_jobs, jobsspecs)
 
 nmachines = 11
 D_in = 3 #(1, njobs, 2) #batch, seq_lenght, num_features
@@ -114,7 +172,7 @@ algo = Algorithm_PPO(
                 optspecs_policy = optspecs_policy,
                 scheduler_value = scheduler_value,
                 schedspecs = schedspecs,
-                seed = 100, #TODO
+                seed = 100,
                 path = path,
                 path_model = path_model,
                 nep_model = nep_model,
