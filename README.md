@@ -39,7 +39,7 @@ To generate new sets of instances:
 
 The output of the experiments can be found in folder **Results_TEST/**, where:
 
-**Statistics_`set_to_test`.xlsx** will report the statistics of the experiments performed on the related set.
+**Statistics_`set_to_test`.xlsx** will report the statistics of the experiments performed on the related set of instances.
 
 ## Team
 
