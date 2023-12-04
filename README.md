@@ -4,7 +4,7 @@ scheduling problem using deep double recurrent agents](https://doi.org/10.1016/j
 by Marta Monaci, Valerio Agasucci and Giorgio Grani.
 
 ```
-@article{MONACI2024910,
+@article{monaci2024anactor,
 title = {An actor-critic algorithm with policy gradients to solve the job shop scheduling problem using deep double recurrent agents},
 journal = {European Journal of Operational Research},
 volume = {312},
@@ -13,7 +13,6 @@ pages = {910-926},
 year = {2024},
 issn = {0377-2217},
 doi = {https://doi.org/10.1016/j.ejor.2023.07.037},
-url = {https://www.sciencedirect.com/science/article/pii/S0377221723005957},
 author = {Marta Monaci and Valerio Agasucci and Giorgio Grani}
 }
 ```
