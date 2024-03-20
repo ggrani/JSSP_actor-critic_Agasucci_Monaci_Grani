@@ -36,7 +36,7 @@ Depending on the set of instances you want to test the model on, you have simply
 To generate new sets of instances:
 
 * according to the Taillard method[^1] (insert **'TaillardGenerator'** and modify the related parameters as you prefer)
-* according to the Gaussian method (insert **'GaussianGenerator'** and modifythe related parameters as you prefer)
+* according to the Gaussian method (insert **'GaussianGenerator'** and modify the related parameters as you prefer)
 * according to the Poisson method (insert **'PoissonGenerator'** and modify the related parameters as you prefer)
 
 [^1]: Taken from https://github.com/zcaicaros/L2D
